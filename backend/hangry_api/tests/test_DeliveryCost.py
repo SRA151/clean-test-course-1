@@ -1,3 +1,6 @@
+import os
+print("RUNNING TEST FILE FROM:", os.path.abspath(__file__))
+
 from api.controllers import Delivery
 from django_mock_queries.query import MockSet, MockModel
 
@@ -26,10 +29,13 @@ def test_MiddleOfTheRoadItems():
   assert cost == 5
 
 def test_LittleItems():
-  #Arrange
-  # TODO: Arrange the items to run the test
-  #Act
-  # TODO: Call the function that will be tested
-  #Assert
-  # TODO: replace the pass with an assert to test the value returned.
-  pass
+#Arrange
+order = MockSet()
+order.add(MockModel(quantity=3))
+order.add(MockModel(quantity=1))
+del_dist = 2
+#Act
+cost = Delivery.calculate(order, del_dist)
+#Assert
+assert cost == 2.50
+assert False 
