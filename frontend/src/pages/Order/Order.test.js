@@ -63,10 +63,11 @@ describe('Test Order', () => {
     );
     //Assert: replace the return true.
     await waitFor(() => {
-      return true;
+      expect(screen.getAllByText('$5.00'))
+        .toHaveLength(1);
+});
     });
   });
-});
 
 const setupMock = () => {
   //Mock API calls
